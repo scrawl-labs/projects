@@ -186,17 +186,16 @@ a:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; border-rad
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 .note {
-  position: absolute;
-  right: -0.5rem; bottom: -2.2rem;
+  position: relative;
   width: max-content;
-  max-width: min(16rem, 80%);
+  max-width: min(18rem, 90%);
+  margin: 1.1rem 0.5rem 0 auto;
   padding: 0.15rem 0.7rem 0;
   font: 400 2rem/0.95 var(--f-hand);
   color: var(--pen);
-  background: var(--paper);
   transform: rotate(-3deg);
 }
-.project:nth-of-type(even) .note { right: auto; left: -0.5rem; transform: rotate(2deg); }
+.project:nth-of-type(even) .note { margin: 1.1rem auto 0 0.5rem; transform: rotate(2deg); }
 .note::before {
   content: "";
   position: absolute;
@@ -224,7 +223,7 @@ a:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; border-rad
   .index a { grid-template-columns: 1fr auto; }
   .index .what { grid-column: 1 / -1; grid-row: 2; font-size: 0.95rem; }
   .project { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-bottom: 4.5rem; }
-  .note, .project:nth-of-type(even) .note { right: 0.25rem; left: auto; bottom: -1.9rem; font-size: 1.75rem; }
+  .note, .project:nth-of-type(even) .note { margin: 1rem 0.25rem 0 auto; font-size: 1.75rem; }
 }
 </style>
 </head>
