@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>scrawl labs</title>
+<meta name="description" content="Things made at scrawl labs: uniffy, Scoldler, KILN, cs-canvas, Achievee and Vinylnyl.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Reenie+Beanie&family=Schibsted+Grotesk:wght@500;700;900&display=swap">
+<style>
+/* Layout: a hand-kept index. The hand-drawn mark and the list of six are the
+   hero; each project below is a two-column spread (words left, screenshot
+   right) with a ballpoint margin note scribbled over the screenshot's corner. */
+:root {
+  --paper: #eef0ec;
+  --sheet: #f8f9f6;
+  --ink: #16181a;
+  --muted: #5d6460;
+  --rule: #c8cdc6;
+  --pen: #2a3dcc;
+  --shot-bg: #0b0d10;
+  --logo-filter: none;
+
+  --f-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-hand: "Reenie Beanie", "Bradley Hand", "Comic Sans MS", cursive;
+
+  --wrap: 72rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121413; --sheet: #191c1a; --ink: #e6e9e4; --muted: #99a09b;
+    --rule: #2d322e; --pen: #8e9cff; --shot-bg: #050607;
+    --logo-filter: invert(0.92); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121413; --sheet: #191c1a; --ink: #e6e9e4; --muted: #99a09b;
+  --rule: #2d322e; --pen: #8e9cff; --shot-bg: #050607;
+  --logo-filter: invert(0.92); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--pen); outline-offset: 3px; border-radius: 2px; }
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- top ---------- */
+.top { padding-block: clamp(2.5rem, 7vw, 5.5rem) 0; }
+.brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.75rem, 2.5vw, 1.75rem);
+}
+.brand img {
+  width: clamp(5rem, 13vw, 8.5rem);
+  height: auto;
+  filter: var(--logo-filter);
+}
+.mark {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  font: 900 clamp(3rem, 11vw, 7.5rem)/0.9 var(--f-display);
+  letter-spacing: -0.045em;
+}
+.mark svg {
+  position: absolute;
+  left: -2%; bottom: -0.22em;
+  width: 104%; height: 0.32em;
+  overflow: visible;
+}
+.mark path { fill: none; stroke: var(--pen); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.lede {
+  max-width: 36rem;
+  margin: 2.4rem 0 0;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+.lede strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- index ---------- */
+.index {
+  list-style: none;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  padding: 0;
+  border-top: 2px solid var(--ink);
+}
+.index a {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15rem) 1fr auto;
+  gap: 0.25rem 2rem;
+  align-items: baseline;
+  padding-block: 0.95rem;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+}
+.index .n {
+  font: 700 clamp(1.4rem, 3vw, 1.9rem)/1.1 var(--f-display);
+  letter-spacing: -0.02em;
+}
+.index .what { color: var(--muted); min-width: 0; }
+.index .where {
+  font: 400 0.8rem/1 var(--f-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.index a:hover .n, .index a:focus-visible .n { color: var(--pen); }
+.index a:hover .n::after { content: " →"; font-weight: 500; }
+
+/* ---------- projects ---------- */
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 1rem;
+}
+.project:last-of-type { border-bottom: 0; }
+.kind {
+  margin: 0;
+  font: 500 0.78rem/1 var(--f-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.project h2 {
+  margin: 0.9rem 0 1.1rem;
+  font: 900 clamp(2.4rem, 5.4vw, 3.6rem)/0.95 var(--f-display);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.project p.desc { margin: 0; max-width: 32rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 1.75rem; }
+.links a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.3em;
+}
+.links a:first-child { color: var(--pen); }
+.links a:hover { text-decoration-thickness: 3px; }
+
+/* screenshot + margin note */
+.shot { position: relative; margin: 0; }
+.shot .frame {
+  display: block;
+  aspect-ratio: 16 / 10;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--sheet);
+  box-shadow: 0 0 0 1px var(--rule), 0 18px 40px -24px rgba(20, 24, 22, 0.45);
+}
+.shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.shot .frame.phone { position: relative; background: var(--shot-bg); }
+.shot .frame.phone img {
+  position: absolute; top: 6%; left: 50%; transform: translateX(-50%);
+  width: auto; height: 88%; object-fit: contain;
+  aspect-ratio: 390 / 844;
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.note {
+  position: absolute;
+  right: -0.5rem; bottom: -2.2rem;
+  width: max-content;
+  max-width: min(16rem, 80%);
+  padding: 0.15rem 0.7rem 0;
+  font: 400 2rem/0.95 var(--f-hand);
+  color: var(--pen);
+  background: var(--paper);
+  transform: rotate(-3deg);
+}
+.project:nth-of-type(even) .note { right: auto; left: -0.5rem; transform: rotate(2deg); }
+.note::before {
+  content: "";
+  position: absolute;
+  inset: -0.1rem -0.3rem;
+  border: 1.5px solid var(--pen);
+  border-radius: 48% 52% 46% 54% / 60% 44% 56% 40%;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ---------- foot ---------- */
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 2.5rem 3.5rem;
+  border-top: 2px solid var(--ink);
+  font: 400 0.82rem/1.5 var(--f-mono);
+  color: var(--muted);
+}
+.foot a { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .index a { grid-template-columns: 1fr auto; }
+  .index .what { grid-column: 1 / -1; grid-row: 2; font-size: 0.95rem; }
+  .project { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-bottom: 4.5rem; }
+  .note, .project:nth-of-type(even) .note { right: 0.25rem; left: auto; bottom: -1.9rem; font-size: 1.75rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="top wrap">
+  <div class="brand">
+    <img src="img/logo.png" width="478" height="380" alt="">
+    <h1 class="mark">scrawl labs
+      <svg viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18 C 70 8, 150 24, 230 12 S 340 6, 396 16 M 30 25 C 120 18, 260 26, 372 20"/></svg>
+    </h1>
+  </div>
+  <p class="lede">I build whatever I need, and whatever sounds fun to build. Here are <strong>six</strong> of them. They're all free, and the code is on GitHub.</p>
+
+  <ol class="index">
+    <li><a href="#uniffy"><span class="n">uniffy</span><span class="what">Point your camera and lb, °F, inch turn into kg, °C, cm</span><span class="where">phone · web app</span></a></li>
+    <li><a href="#scoldler"><span class="n">Scoldler</span><span class="what">Hear how a native speaker would have said it</span><span class="where">macOS</span></a></li>
+    <li><a href="#kiln"><span class="n">KILN</span><span class="what">Type a word, shape it in clay, fire it in a kiln</span><span class="where">web · 3D</span></a></li>
+    <li><a href="#cs-canvas"><span class="n">cs-canvas</span><span class="what">Computer science you can step through</span><span class="where">web</span></a></li>
+    <li><a href="#achievee"><span class="n">Achievee</span><span class="what">Goals, to-dos, workouts, spending and a diary on one screen</span><span class="where">web</span></a></li>
+    <li><a href="#vinylnyl"><span class="n">Vinylnyl</span><span class="what">Whatever's playing, spinning as a record on your screen</span><span class="where">mac · win · linux</span></a></li>
+  </ol>
+</header>
+
+<main class="wrap">
+
+  <section class="project" id="uniffy">
+    <div>
+      <p class="kind">Phone · web app</p>
+      <h2>uniffy</h2>
+      <p class="desc">Take a photo and units like lb, °F, inch, cup and mph turn into kg, °C, cm, ml and km/h right where they're printed. Text recognition runs on your phone, so photos never leave it. Once the model is cached it works offline, even in a basement gym with no signal.</p>
+      <div class="links">
+        <a href="https://scrawl-labs.github.io/uniffy/" target="_blank" rel="noopener">Open it ↗</a>
+        <a href="https://github.com/scrawl-labs/uniffy" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <span class="frame phone"><img src="img/uniffy.webp" width="390" height="844" alt="The uniffy camera screen, with a guide box in the middle and a shutter button below."></span>
+      <figcaption class="note">how many kg is a 45 lb plate again?</figcaption>
+    </figure>
+  </section>
+
+  <section class="project" id="scoldler">
+    <div>
+      <p class="kind">macOS app</p>
+      <h2>Scoldler</h2>
+      <p class="desc">It listens while you speak English, then shows you, line by line, how a native speaker would have said it. Transcription and feedback both run on your Mac. No cloud, no account.</p>
+      <div class="links">
+        <a href="https://scoldler.vercel.app" target="_blank" rel="noopener">Website ↗</a>
+        <a href="https://github.com/scrawl-labs/scolder/releases/latest" target="_blank" rel="noopener">Get the .dmg</a>
+        <a href="https://github.com/scrawl-labs/scolder" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <span class="frame"><img src="img/scoldler.webp" width="1200" height="750" loading="lazy" alt="The Scoldler website: 'Stop saying it wrong.' next to a session report."></span>
+      <figcaption class="note">didn't went → didn't go</figcaption>
+    </figure>
+  </section>
+
+  <section class="project" id="kiln">
+    <div>
+      <p class="kind">Web · 3D</p>
+      <h2>KILN</h2>
+      <p class="desc">Type a word and it gets built out of clay. Squish it into shape with your hands, let it dry, fire it, glaze it and fire it again. Every clay body fires at its own temperature.</p>
+      <div class="links">
+        <a href="https://kilntypo.xyz" target="_blank" rel="noopener">Make one ↗</a>
+        <a href="https://github.com/scrawl-labs/kiln" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <span class="frame"><img src="img/kiln.webp" width="1200" height="750" loading="lazy" alt="KILN: the word 'clay' made of speckled stoneware, next to the kiln log."></span>
+      <figcaption class="note">stoneware fires to 1240°C</figcaption>
+    </figure>
+  </section>
+
+  <section class="project" id="cs-canvas">
+    <div>
+      <p class="kind">Web · learning</p>
+      <h2>cs-canvas</h2>
+      <p class="desc">Run an algorithm, step through it, and see why each step happens. Algorithms, data structures, operating systems, networks, databases and computer architecture. The pictures you'd normally draw in your head, on screen.</p>
+      <div class="links">
+        <a href="https://cs-canvas.vercel.app" target="_blank" rel="noopener">Explore ↗</a>
+        <a href="https://github.com/scrawl-labs/cs-canvas" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <span class="frame"><img src="img/cs-canvas.webp" width="1200" height="750" loading="lazy" alt="The cs-canvas home page, with graph nodes linked by thin lines."></span>
+      <figcaption class="note">the BST &amp; heap ones are hands-on</figcaption>
+    </figure>
+  </section>
+
+  <section class="project" id="achievee">
+    <div>
+      <p class="kind">Web</p>
+      <h2>Achievee</h2>
+      <p class="desc">A daily tracker with goals, to-dos, calendar, workouts, spending and a diary on one screen. When you write in the diary, you pick what you felt from 161 emotion words. Works in English, Korean, Japanese, Spanish and Traditional Chinese.</p>
+      <div class="links">
+        <a href="https://achievee.vercel.app" target="_blank" rel="noopener">Try it ↗</a>
+        <a href="https://github.com/scrawl-labs/achievee" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <span class="frame"><img src="img/achievee.webp" width="1200" height="750" loading="lazy" alt="The Achievee website: 'What exactly did you feel today?' above a monthly log."></span>
+      <figcaption class="note">161 words for how today felt</figcaption>
+    </figure>
+  </section>
+
+  <section class="project" id="vinylnyl">
+    <div>
+      <p class="kind">Desktop widget</p>
+      <h2>Vinylnyl</h2>
+      <p class="desc">Whatever is playing shows up as a spinning vinyl record, floating above every app. Works with YouTube, YouTube Music, Spotify and more, on macOS, Windows and Linux. Free, fully local, no account.</p>
+      <div class="links">
+        <a href="https://vinylnyl.vercel.app" target="_blank" rel="noopener">Website ↗</a>
+        <a href="https://github.com/scrawl-labs/vinylnyl/releases/latest" target="_blank" rel="noopener">Download</a>
+        <a href="https://github.com/scrawl-labs/vinylnyl" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <figure class="shot">
+      <span class="frame"><img src="img/vinylnyl.webp" width="1200" height="750" loading="lazy" alt="The Vinylnyl website: a record with a yellow label, with the song title below."></span>
+      <figcaption class="note">side A, 33 rpm</figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<footer class="foot wrap">
+  <span>scrawl labs · 2026</span>
+  <a href="https://github.com/scrawl-labs" target="_blank" rel="noopener">github.com/scrawl-labs</a>
+</footer>
+</body>
+</html>
